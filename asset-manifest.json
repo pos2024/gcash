@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/pos2024/gcash.git/static/css/main.ee4f05b9.css",
+    "main.js": "/pos2024/gcash.git/static/js/main.a3583d92.js",
+    "index.html": "/pos2024/gcash.git/index.html",
+    "main.ee4f05b9.css.map": "/pos2024/gcash.git/static/css/main.ee4f05b9.css.map",
+    "main.a3583d92.js.map": "/pos2024/gcash.git/static/js/main.a3583d92.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ee4f05b9.css",
+    "static/js/main.a3583d92.js"
+  ]
+}
