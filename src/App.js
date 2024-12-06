@@ -7,6 +7,11 @@ import Layout from './page/Layout';
 import CustomerList from './component/CustomerList';
 import Gcash from './gcash/gcash'
 import TableView from './page/TableView';
+import Cart from './pos/Cart';
+import ProductsTable from './pos/ProductsTable';
+import AddProduct from './pos/AddProduct';
+import AddCategoryAndSubcategory from './pos/AddCategoryAndSubcategory';
+import SoftDrinksTable from './pos/SoftDrinksTable';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +37,13 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={router} /> 
+      {/* <RouterProvider router={router} />  */}
+
+      <Cart/>
+      <SoftDrinksTable/>
+      <ProductsTable/>
+      <AddProduct/>
+      <AddCategoryAndSubcategory/>
  
     </>
   );
