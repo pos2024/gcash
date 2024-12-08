@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { collection, addDoc,getDocs } from 'firebase/firestore';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 import db from '../firebase'; // Importing db
 
 const DownloadProducts = () => {
@@ -14,7 +14,7 @@ const DownloadProducts = () => {
     }
   };
 
-  // Function to handle file upload
+  // Function to handle file upload for products
   const handleUpload = async (collectionName) => {
     if (!file) {
       alert('Please select a JSON file.');
@@ -26,27 +26,39 @@ const DownloadProducts = () => {
     const reader = new FileReader();
     reader.onload = async (e) => {
       try {
+        // Parse the JSON file content
         const data = JSON.parse(e.target.result);
+
+        // Ensure data is an array and log it
+        if (!Array.isArray(data)) {
+          throw new Error('Invalid JSON format. Expected an array of objects.');
+        }
+
+        console.log('Uploading data:', data);  // Log the data for debugging
 
         // Insert data into Firestore collection
         const collectionRef = collection(db, collectionName);
 
-        // Add each item in the JSON data to the Firestore collection
         for (const item of data) {
-          await addDoc(collectionRef, item); // Adding each item to the collection
+          if (item && typeof item === 'object') {
+            await addDoc(collectionRef, item); // Adding each item to the collection
+          } else {
+            console.error('Invalid item in data:', item);
+          }
         }
 
         alert(`${collectionName} uploaded successfully!`);
       } catch (error) {
         console.error('Error uploading data:', error);
-        alert('Error uploading data.');
+        alert(`Error uploading data: ${error.message}`);
       } finally {
         setUploading(false);
       }
     };
 
-    reader.onerror = () => {
-      alert('Error reading the file.');
+    reader.onerror = (error) => {
+      console.error('Error reading the file:', error);
+      alert('Error reading the file. Please try again with a valid JSON file.');
       setUploading(false);
     };
 
@@ -81,24 +93,18 @@ const DownloadProducts = () => {
   return (
     <div className="flex justify-center items-center p-6">
       <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
-        <h1 className="text-2xl font-bold mb-4 text-center">Download / Upload Collections</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center">Download / Upload Products Collection</h1>
 
         <div className="space-y-4">
-          {/* Download Buttons */}
+          {/* Download Button for Products */}
           <button
             onClick={() => downloadCollection('products')}
             className="w-full py-3 px-6 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
           >
             Download Products Collection
           </button>
-          <button
-            onClick={() => downloadCollection('categories')}
-            className="w-full py-3 px-6 bg-green-500 text-white rounded-lg hover:bg-green-600"
-          >
-            Download Categories Collection
-          </button>
 
-          {/* File Upload Section */}
+          {/* File Upload Section for Products */}
           <div className="space-y-2">
             <input
               type="file"
@@ -112,13 +118,6 @@ const DownloadProducts = () => {
               disabled={uploading}
             >
               {uploading ? 'Uploading...' : 'Upload Products Collection'}
-            </button>
-            <button
-              onClick={() => handleUpload('categories')}
-              className="w-full py-3 px-6 bg-green-500 text-white rounded-lg hover:bg-green-600"
-              disabled={uploading}
-            >
-              {uploading ? 'Uploading...' : 'Upload Categories Collection'}
             </button>
           </div>
         </div>

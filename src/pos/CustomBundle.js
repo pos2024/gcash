@@ -10,11 +10,11 @@ const CustomBundle = ({ softDrinks, addCustomBundleToCart }) => {
 
       const updatedBundle = existingProductIndex >= 0
         ? prevBundle.map((item, index) => {
-            if (index === existingProductIndex) {
-              return { ...item, quantity: item.quantity + 1 };
-            }
-            return item;
-          })
+          if (index === existingProductIndex) {
+            return { ...item, quantity: item.quantity + 1 };
+          }
+          return item;
+        })
         : [...prevBundle, { ...product, quantity: 1 }];
 
       const updatedBundleWithPrice = updatedBundle.map((item) => {

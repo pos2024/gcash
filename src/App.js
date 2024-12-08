@@ -46,7 +46,7 @@ function App() {
       {/* <RouterProvider router={router} />  */}
 
       <Cart/>
-
+<DownloadProducts/>
       <SalesCategories/>
       <Sales/>
      <UpdatePrice/>
