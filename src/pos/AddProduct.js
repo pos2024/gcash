@@ -43,7 +43,7 @@ const AddProduct = () => {
   const handleBulkPricingChange = (index, field, value) => {
     const updatedBulkPricing = [...bulkPricing];
     updatedBulkPricing[index][field] = value;
-    updatedBulkPricing[index].bulkPricePerUnit = 
+    updatedBulkPricing[index].bulkPricePerUnit =
       updatedBulkPricing[index].price && updatedBulkPricing[index].quantity
         ? (parseFloat(updatedBulkPricing[index].price) / parseInt(updatedBulkPricing[index].quantity)).toFixed(2)
         : '';
@@ -86,6 +86,7 @@ const AddProduct = () => {
         unitsPerCase: isSoldByPiece ? 1 : parseInt(unitsPerCase),
         stockInUnits,
         imageUrl,
+        purchaseCount: 0, // Default value added here
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
       };
@@ -117,6 +118,7 @@ const AddProduct = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
+
 
   return (
     <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded shadow-lg">

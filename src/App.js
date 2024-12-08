@@ -12,6 +12,12 @@ import ProductsTable from './pos/ProductsTable';
 import AddProduct from './pos/AddProduct';
 import AddCategoryAndSubcategory from './pos/AddCategoryAndSubcategory';
 import SoftDrinksTable from './pos/SoftDrinksTable';
+import DeliverDrinks from './pos/DeliverDrinks';
+import UpdateProduct from './pos/UpdateProduct';
+import UpdatePrice from './pos/UpdatePrice';
+import Sales from './pos/Sales';
+import SalesCategories from './pos/SalesCategories';
+import DownloadProducts from './pos/DownloadProducts';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +46,11 @@ function App() {
       {/* <RouterProvider router={router} />  */}
 
       <Cart/>
+
+      <SalesCategories/>
+      <Sales/>
+     <UpdatePrice/>
+      <DeliverDrinks/>
       <SoftDrinksTable/>
       <ProductsTable/>
       <AddProduct/>
